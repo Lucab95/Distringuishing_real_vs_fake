@@ -1,6 +1,7 @@
 import timm
 import torch.nn.functional as F
 import torch.nn as nn
+
 class CNN_Model(nn.Module):
     def __init__(self, emb_size=512):
       super().__init__()
@@ -65,3 +66,45 @@ class CNN_Model(nn.Module):
 
 
       return x
+
+class Network(nn.Module):
+    def __init__(self, emb_dim=128):
+        super(Network, self).__init__()
+        self.conv = nn.Sequential(
+            nn.Conv2d(1, 32, 5),
+            nn.PReLU(),
+            nn.MaxPool2d(2, stride=2),
+            nn.Dropout(0.3),
+            nn.Conv2d(32, 64, 5),
+            nn.PReLU(),
+            nn.MaxPool2d(2, stride=2),
+            nn.Dropout(0.3)
+        )
+        
+        self.fc = nn.Sequential(
+            nn.Linear(64*4*4, 512),
+            nn.PReLU(),
+            nn.Linear(512, emb_dim)
+        )
+        
+    def forward(self, x):
+        x = self.conv(x)
+        x = x.view(-1, 64*4*4)
+        x = self.fc(x)
+        # x = nn.functional.normalize(x)
+        return x
+
+def resnet50(pretrained=False,num_classes=1000,duration=8, **kwargs):
+    """Constructs a ResNet-50 model.
+
+    Args:
+        pretrained (bool): If True, returns a model pre-trained on ImageNet
+    """
+    model = ResNet(Bottleneck, [3, 4, 6, 3], duration, **kwargs)
+    if pretrained:
+        model.load_state_dict(model_zoo.load_url(model_urls['resnet50']))
+        if num_classes!=1000:
+            num_ftrs = model.fc.in_features
+            print(num_classes)
+            model.fc = nn.Linear(num_ftrs, num_classes)
+    return model

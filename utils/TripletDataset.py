@@ -106,8 +106,7 @@ class TripletNetworkDataset(Dataset):
                 video_frames_neg.append(negative_frame)
 
             if self.required_frames==1:
-                
-                return anchor_frame , positive_frame , negative_frame
+                return anchor_frame , positive_frame , negative_frame, anchor_label
             
             video_frames_anch = torch.stack(video_frames_anch,0)
             # triplet = torch.stack(triplet,0)

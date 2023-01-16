@@ -8,12 +8,12 @@ training_params:
   size:        0 #0 to use all the examples available in the csv, define a number to have subsamples
   num_classes: 12
 
-models: ["cnn-lstm"]
+models: ["cnn"]
 
 datamodule:
   csv_file:       /app/manual_label_50k_trainval.csv
   dataset_dir:     C:\Users\luca9\Desktop\Thesis\Code\Output
-  n_frames: 8
+  n_frames: 20
   # dataset_dir:    topbottomfullouter_09_2022_384x512
   batch_size:     1
   height:         224

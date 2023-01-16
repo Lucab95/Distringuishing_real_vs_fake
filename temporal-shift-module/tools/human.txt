@@ -1,0 +1,12 @@
+fake-surprise
+fake-angry
+fake-contempt
+fake-disgust
+fake-sad
+real-angry
+real-contempt
+real-disgust
+real-happy
+real-sad
+real-surprise
+fake-happy

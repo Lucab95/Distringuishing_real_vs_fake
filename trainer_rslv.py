@@ -279,7 +279,6 @@ def train(
                 / n_steps_per_epoch,
                 "train/example_ct": example_ct,
             }
-
         running_loss = running_loss / len(train_loader)
 
         if running_loss < best_train_loss[0]:

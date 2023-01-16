@@ -1,0 +1,37 @@
+training_params:
+
+  max_epochs : 50
+  lr:          0.0001
+  decay:       0.000005
+  optim :      "adam"
+  step:        5
+  size:        0 #0 to use all the examples available in the csv, define a number to have subsamples
+  num_classes: 12
+
+# models: ["ResNet50"]
+models: ["VGG16"]
+
+datamodule:
+  csv_file:       /app/manual_label_50k_trainval.csv
+  dataset_dir:     C:\Users\luca9\Desktop\Thesis\Code\Output
+  n_frames: 8
+  # dataset_dir:    topbottomfullouter_09_2022_384x512
+  batch_size:     1
+  height:         224
+  width:          224
+  type:           "video"
+
+int2emo: {
+        0: Fake-Angry,
+        1: Fake-Contempt,
+        2: Fake-Disgust,
+        3: Fake-Happy,
+        4: Fake-Sad,
+        5: Fake-Surprise,
+        6: Real-Angry,
+        7: Real-Contempt,
+        8: Real-Disgust,
+        9: Real-Happy,
+        10: Real-Sad,
+        11: Real-Surprise     
+}
